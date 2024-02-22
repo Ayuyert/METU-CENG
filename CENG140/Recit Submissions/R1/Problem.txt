@@ -1,0 +1,26 @@
+SIMPLE WEATHER CONVERSION
+You will get Fahrenheit weather degree for weekdays (from Mondays to Friday)
+Your task is to convert each day's degree to celsius and print them with the average of the days.
+Fahrenheit to celsius formula is:
+     T(°C) = (T(°F) - 32) / 1.8
+
+
+Details
+Firstly, prompt the user by asking degree in Fahrenheit for 5 days.
+Convert them to celsius form for each day.
+Print them in the same order, with their average at the end.
+Obey the output format exactly.
+
+
+Example Input:
+41 50 41 50 41
+
+
+
+Example Output:
+Celsius on Mon: 5.00
+Celsius on Tue: 10.00
+Celsius on Wed: 5.00
+Celsius on Thu: 10.00
+Celsius on Fri: 5.00
+Average: 7.00

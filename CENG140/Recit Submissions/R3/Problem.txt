@@ -1,0 +1,78 @@
+FINDING NEAREST POINT
+In this question, you are required to calculate the nearest point in a 2 dimensional (2D) space where each point has x and y pair. You will prompt the user by asking x and y coordinate of a point P, then you will find the index of the nearest point in the stored arrays. 
+
+NOTE: DO NOT WORRY ABOUT ARRAYS! YOU WILL JUST ACCESS THE VALUES INSIDE THE ARRAYS.
+
+
+
+Specifications
+
+1. Points are stored in two integer arrays which one array stores x coordinates and other stores y coordinates. 
+
+In this representation, the coordinates of the first point is stored in xcoors[0] and ycoors[0] in a corresponding manner and other points similarly. 
+
+2. Points array will be given at the beginning of your program.
+
+3. Euclidean distance will be used as distance metric. Remember that Euclidean distance between 2D points is that 
+
+square root of ((qx - px)^2 + (qy - py)^2), where px and py are x and y coordinates of the point P respectively.
+
+
+
+Output
+In the output, first print point P, then nearest array index and distance between point P and this index. Sample output:
+
+P = (12,30), nearest point index = 7, distance = 4.0
+Please strictly obey this output format. No newline is used in output.
+
+
+
+Note: 
+
+- You can use functions such as sqrt, pow from math library. 
+
+- You can use any type of loop.
+
+- All given point coordinates are integers, show distance as float with 1 precision point.
+
+- There are 10 points in coordinate arrays.
+
+- If two coordinates' distances are equal, use the one with the lower index.
+
+Input 1:
+3 4 2 1 0 9 0 1 5 6
+3 3 1 6 2 9 8 9 3 7
+9
+8
+Output 1:
+
+P = (9,8), nearest point index = 5, distance = 1.0
+
+Input 2:
+38 7 0 40 48 29 36 17 3 6
+45 10 31 43 21 20 14 29 27 26
+25
+25
+Output 2:
+
+P = (25,25), nearest point index = 5, distance = 6.4
+
+Input 3:
+68 49 98 0 76 61 92 18 31 14
+40 84 50 65 53 43 32 20 7 9
+22
+45
+Output 3:
+
+P = (22,45), nearest point index = 7, distance = 25.3
+
+
+Input 4:
+99 116 160 187 122 122 74 143 135 188
+22 128 163 195 11 15 187 31 166 196
+122
+13
+Output 4:
+
+P = (122,13), nearest point index = 4, distance = 2.0
+

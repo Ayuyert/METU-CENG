@@ -1,0 +1,19 @@
+Basics of Structs
+In this quiz, you will complete two functions that make some simple operations on struct Person type. For the definition of struct Person, you may check question.h but please do not modify question.h. 
+
+The functions you need to implement are in question.c, these functions are:
+
+void set_age(struct Person* p, int new_age): This function overwrites the age member of p, with new_age.
+void print_info(struct Person* p): This function will print the initial and age of p. You should print initial first, then the age. Also, there should be a new line after each member.
+NOTES:
+- You will complete the set_age() and print_info() functions in question.c.
+
+- If you get an out of memory error, try again in a few seconds.
+
+- You should not need utility functions.
+
+- You are not allowed to change run.c or question.h.
+
+- You should not use print statements in set_age.c.
+
+- Each function is worth 50 points

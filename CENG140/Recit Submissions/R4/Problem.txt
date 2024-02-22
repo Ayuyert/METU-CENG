@@ -1,0 +1,137 @@
+RECURSIVE FUNCTION IMPLEMENTATIONS
+SPECIFICATIONS
+In this lab practice, you will recursively implement 2 functions.
+As we require recursive implementations, you cannot use static, goto, while and for keywords in anywhere in your submissions.
+Do not use static, goto, while and for strings anywhere in your files, even in comments or as parts of other strings, variables, function names etc.
+These kinds of statements will give you specs errors:
+/* it would be easier with a for loop */ 
+int forawhile = 1; 
+static int i=0;
+You will print the arguments of the functions at each call to trace the recursion.
+We only use spaces and newlines in the outputs, no tabs or spaces after the newlines. 
+In the examples, your output lines are preceded with "> " characters and the prints of the testers are preceded with "# " characters for your convenience. Do not add "> " to your print statements.
+recit_4_2.c  is the file you need to modify and write your solutions in.
+run.c  file is given for test and debug and it is not used in evaluation. You do not need to use this file.
+You can modify run.c to create your own tests, it will be used when you click run or debug.
+Your submission (recit_4_2.c) will be evaluated and graded only when you click evaluate.
+
+
+
+TASK 1: Number of Combinations
+In this task you will implement a function that returns the number k choices in a set of size n which is given as the combination formula below.
+
+The combination formula or "n choose k" is usually given as:
+
+
+
+another way to formulate the same equation recursively is:
+
+
+
+The function for this task is given as below, which takes two integers and return another one.
+
+int combinations(int n, int k);
+
+Hint & Warning: We are calculating combinations with recursion. It is expected that you should do minimum number of calls for combinations() function. There is a way of speeding up the calculation. For instance, C(20, 16) and C(20,4) are equal, if arguments are n=20 and k=16, you should call same function with n=20 and k=4, to get the same output.
+
+Step by step calculation of "24 choose 20":
+
+The 1st call is combinations (24, 20).
+The 2nd call is combinations(24, 4) since it is faster to calculate C(24,4) than C(24,20).
+The 3rd call is combinations (23, 3).
+The 4th call is combinations (22, 2).
+The 5th call is combinations (21, 1).
+The 6th call is combinations (20, 0). This one is the base case, returns 1.
+1 is multiplied with 21 from 5th step, 22, 23, 24 from other steps and final result is 10626.
+An example call for combinations of 24 and 20
+
+int n = combinations(24, 20);
+This is the expected output:
+
+> (24 20)
+> (24 4)
+> (23 3)
+> (22 2)
+> (21 1)
+> (20 0)
+# combinations(24 20)=10626
+Another example with 4 and 2:
+
+int n = combinations(4, 2);
+Output:
+
+> (4 2)
+> (3 1)
+> (2 0)
+# combinations(4 2)=6
+
+TASK 2: Sine function using Taylor Series
+In this task you will approximate the sine function using taylor series. We will expand the series up to a certain point. At each iteration, our guess for the sine function will converge to the actual sine value. We will stop at a given number of recursive calls or when the change in our guess is very small. 
+
+The sine function will take the value of the angle in radians (PI) and integer value  that show the maximum number of recursive calls.
+
+double sine(double x, int iter);
+Taylor Series
+Taylor series for the sine function is given below:
+
+sinx function
+
+You can also expand the summation as below:
+
+sinx
+
+Step by step operations for calculating sine(PI/6) which is 30 degrees:
+
+x = PI/6 which is 3.1415926 / 6 = 0.523599
+x0 = x = 0.523599
+x1 = x0 - x3/3! = 0.499674
+x2 = x1 + x5/5! = 0.500002
+x3 = x2 - x7/7! = 0.500000
+After this step the change is very small (less than 0.000001), therefore we stop and return the value
+
+
+This time we also expect you to print the number of recursive calls at each iteration.
+
+Hint: Define a helper function with extra arguments and call it in the sine function. Let the helper handle the recursion. 
+
+Hint: You can use the given iter argument as a constant number that shows the maximum number of possible calls.
+
+For this task you are also given the relative error and the absolute value, the power and the factorial functions in the header. The functions are implemented for you, you can just use them like the given examples in run.c file:
+
+#define ERROR 0.000001
+double absolute(double d);
+double power(double base, int exp);
+double factorial(int n);
+When the change between your new approximation and the previous approximation is less than ERROR or 0.000001, you should stop the recursive calls.
+
+Otherwise you should stop at the given maximum iteration (iter argument of the function).
+
+
+
+An example to calculate the sine of 30 degrees or PI/6 at most 10 iterations
+
+#define PI 3.1415926
+double a = sine(PI/6, 10);
+The output only contains 4 iterations, after that the difference between the successive guesses is less than 0.000001 and we return.
+
+> sin(0.523599) = 0.523599 at recursive call 1
+> sin(0.523599) = 0.499674 at recursive call 2
+> sin(0.523599) = 0.500002 at recursive call 3
+> sin(0.523599) = 0.500000 at recursive call 4
+# sin(pi/6) = 0.500000
+Another example
+
+double a = sine(3*PI/2, 10);
+This time, we go all the way to the 10th iteration. Note the minor error in the result. Our approximation is slightly off from the actual value:
+
+> sin(4.712389) = 4.712389 at recursive call 1
+> sin(4.712389) = -12.728641 at recursive call 2
+> sin(4.712389) = 6.636666 at recursive call 3
+> sin(4.712389) = -3.602329 at recursive call 4
+> sin(4.712389) = -0.444366 at recursive call 5
+> sin(4.712389) = -1.081890 at recursive call 6
+> sin(4.712389) = -0.991139 at recursive call 7
+> sin(4.712389) = -1.000735 at recursive call 8
+> sin(4.712389) = -0.999952 at recursive call 9
+> sin(4.712389) = -1.000003 at recursive call 10
+# sin(3/2*pi) = -1.000003
