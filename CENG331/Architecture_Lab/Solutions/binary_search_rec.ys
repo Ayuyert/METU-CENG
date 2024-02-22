@@ -1,0 +1,121 @@
+# FURKAN KARACA 2521698
+.pos 0x0
+init:
+    irmovq stack, %rsp
+    irmovq $6, %rdx
+    irmovq array_begin, %rdi
+    irmovq array_end, %rsi
+    call binary_search
+    halt
+
+#implement your code below (DO NOT CHANGE/REMOVE THIS COMMENT)
+
+
+//rdi begin
+//rsi end
+//rdx val
+
+binary_search:
+  pushq %rdi //begin*
+  pushq %rsi //end*
+  rrmovq %rsi, %rax //end to rax
+  subq %rdi, %rax
+  irmovq $16, %rbx
+  dvvq %rbx, %rax
+  irmovq $8, %rbx
+  mllq %rbx, %rax
+  addq %rdi, %rax //rax = mid
+  rrmovq %rax, %r8
+  pushq %r8 //mid*
+  rrmovq %rax, %rbx
+  rrmovq %rdi, %rax //rax = begin
+  subq %rsi, %rax //begin -end
+  jl C1 //goto else if (*mid == value)
+  irmovq $-1, %rax
+  popq %r8
+  popq %rsi
+  popq %rdi
+  ret
+
+C1: //goto else if (*mid == value)
+  rrmovq %rdx, %r14 //VAL to r14
+  mrmovq (%r8), %r9 //*mid to r9
+  subq %r14, %r9 //*mid-val
+  jne C2 //(mid<val)
+  rrmovq %r8, %r12 //mid to r12
+  rrmovq %rdi, %rcx //begin to rcx
+  subq %rcx, %r12 //mid-begin
+  irmovq $8, %r14
+  dvvq %r14, %r12
+  irmovq $1, %r9
+  addq %r9, %r12
+  rrmovq %r12, %rax
+  popq %r8
+  popq %rsi
+  popq %rdi
+  ret
+
+C2: //else if (*mid < value)
+  rrmovq %rdx, %r14 //val = r14
+  mrmovq (%r8), %r9 //mids value to r9
+  subq %r14, %r9 //*mid-val
+  jge C3 // mid-r9>0, mid >val
+  irmovq $8, %rcx
+  addq %r8, %rcx
+  rrmovq %rcx, %rdi
+  call binary_search
+  rrmovq %rax, %r11 //r11 is temp
+  rrmovq %rax, %r10
+  irmovq $-1, %r14
+  subq %r14, %r10 //temp -(- 1)
+  jne C21
+  rrmovq %r11, %rax
+  popq %r8
+  popq %rsi
+  popq %rdi
+  ret
+  
+  
+C21: //(tmp != -1)
+  popq %r8
+  popq %rsi
+  popq %rdi
+  rrmovq %r8, %r9 //r9 mid
+  rrmovq %rdi, %rax //rax begin
+  subq %rax, %r9
+  irmovq $8, %r10
+  dvvq %r10, %r9
+  irmovq $1, %r14
+  addq %r14, %r9
+  addq %r11, %r9
+  rrmovq %r9, %rax
+  
+  ret
+  
+C3: //else
+  rrmovq %r8, %rsi
+  call binary_search
+  popq %r8
+  popq %rsi
+  popq %rdi
+  ret 
+
+#implement your code above (DO NOT CHANGE/REMOVE THIS COMMENT)
+
+.pos 0x1008
+array_begin:
+    .quad 1
+    .quad 2
+    .quad 3
+    .quad 5
+    .quad 6
+    .quad 7
+    .quad 9
+    .quad 11
+array_end:
+    .quad 0
+.pos 0x1F00
+stack:
+    .quad 0
+
+

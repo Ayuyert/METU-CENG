@@ -1,0 +1,83 @@
+# FURKAN KARACA 2521698
+.pos 0x0
+init:
+    irmovq stack, %rsp
+    irmovq $6, %rdx
+    irmovq array_begin, %rdi
+    irmovq array_end, %rsi
+    call binary_search
+    halt
+
+#implement your code below (DO NOT CHANGE/REMOVE THIS COMMENT)
+
+
+
+loop:
+  rrmovq %rsi, %rbx //end in rbx
+  subq %rdi, %rbx //end-begin
+  irmovq $16, %rax
+  dvvq %rax, %rbx
+  irmovq $8, %rax
+  mllq %rax, %rbx
+  addq %rdi, %rbx //rbx is mid
+  rrmovq %rbx, %rax
+  mrmovq (%rax), %r9 //r9 is *mid
+  subq %rdx, %r9
+  jne C1
+  rrmovq %rbx, %rax
+  subq %r13, %rax
+  irmovq $8, %r9
+  dvvq %r9, %rax
+  irmovq $1, %r9
+  addq %r9, %rax
+  ret
+    
+binary_search:
+  rrmovq %rdi, %r13 //begin to r13
+  rrmovq %rdi, %rcx //rcx = begin
+  subq %rsi, %rcx
+  jl loop
+  irmovq $-1, %rax
+  ret
+  
+  
+C1:
+  rrmovq %rbx, %rax //rax is mid
+  mrmovq (%rax), %r9 //r9 is *mid
+  subq %rdx, %r9 //  mid-value
+  jg C2
+  rrmovq %rbx, %r9
+  irmovq $8, %r10
+  addq %r10, %r9
+  rrmovq %r9, %rdi
+  rrmovq %rdi, %r10 //r10 is begin
+  subq %rsi, %r10 //b-e
+  jl loop
+  irmovq $-1, %rax
+  ret
+  
+C2:
+  rrmovq %rbx, %rsi
+  rrmovq %rsi, %rax
+  subq %rdi, %rax // begin-end
+  jg loop
+  irmovq $-1, %rax
+  ret
+
+#implement your code above (DO NOT CHANGE/REMOVE THIS COMMENT)
+
+.pos 0x1008
+array_begin:
+    .quad 1
+    .quad 2
+    .quad 3
+    .quad 5
+    .quad 6
+    .quad 7
+    .quad 9
+    .quad 11
+array_end:
+    .quad 0
+.pos 0x1F00
+stack:
+    .quad 0
