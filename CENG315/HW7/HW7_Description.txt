@@ -1,0 +1,16 @@
+In your network security term project, you are tasked with planning a network attack. You propose a method to your friends that aims to maximize the speed of infecting the whole network. Given a network, you will first calculate the infection_score for each node, which represents how fast the whole network will be infected if you only infect the selected node. 
+
+The network is represented as a directed, weighted graph, where the weights of each edge represent how long it takes the network to deliver a package between the two nodes, i.e. the vertices of that edge. For node count N, and the maximum shortest path distance in the graph between any pair (i,j) as MaxDist, infection_score "IS" is defined as follows:
+
+def 
+
+Problem
+
+In this exam, you are asked to calculate the infection_scores given the network as a directed, weighted graph by completing the get_infection_scores() function defined below. 
+
+void get_infection_scores(const std::vector< std::vector<std::pair<int, int>>> &network, std::vector<double> infection_scores));
+
+
+network: Graph adjacency list 
+infection_scores: Calculated infection scores (IS) of each node, ordered by node ID.
+
